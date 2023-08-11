@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Transport_licensing_tax_management.DataModel.Payments>
+
+@{
+    ViewData["Title"] = "New Vehicles Registration List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Payments ID</th>
+            <th>Payment By Code</th>
+            <th>Payment By Car Number</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Create At</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payment in Model)
+        {
+            <tr>
+                <td>@payment.PaymentsID</td>
+                <td>@payment.PaymentCode</td>
+                <td>@payment.CarNumber</td>
+                <td>@payment.Amount</td>
+                <td>@payment.Type</td>
+                <td>@payment.Create_At</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transport_licensing_tax_management", "Transport_licensing_tax_management.csproj", "{F64EEC69-C8E8-4C2D-9B7D-0F27F9DB9ABB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F64EEC69-C8E8-4C2D-9B7D-0F27F9DB9ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F64EEC69-C8E8-4C2D-9B7D-0F27F9DB9ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F64EEC69-C8E8-4C2D-9B7D-0F27F9DB9ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F64EEC69-C8E8-4C2D-9B7D-0F27F9DB9ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {825ACF9E-6EA2-47B1-ABCF-54C5F58C2E82}
+	EndGlobalSection
+EndGlobal

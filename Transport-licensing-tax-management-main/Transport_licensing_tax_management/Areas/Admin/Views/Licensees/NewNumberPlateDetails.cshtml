@@ -1,0 +1,219 @@
+﻿@model Transport_licensing_tax_management.DataModel.Vehicles
+
+@{
+    ViewData["Title"] = "New Number Plate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="x_panel">
+    <div class="x_title">
+        <h2>New Number Plate</h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                </div>
+            </li>
+            <li>
+                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li>
+                <a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <br />
+
+        <h4>Owner Information</h4>
+        <div class="form-horizontal form-label-left">
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-3" for="register-name">Owner Name:</label>
+                    <div class="col-md-9">
+                        <input type="text" id="register-name" class="form-control" value="@Model.RegisterName" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label col-md-3" for="register-nid">Register NID:</label>
+                    <div class="col-md-9">
+                        <input type="text" id="register-nid" class="form-control" value="@Model.RegisterNID" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-3" for="nationality">Nationality:</label>
+                    <div class="col-md-9">
+                        <input type="text" id="nationality" class="form-control" value="@Model.Nationality" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label col-md-3" for="bank">Bank:</label>
+                    <div class="col-md-9">
+                        <input type="text" id="bank" class="form-control" value="@Model.Bank" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label class="control-label col-md-3" for="phone-number">Phone Number:</label>
+                    <div class="col-md-9">
+                        <input type="text" id="phone-number" class="form-control" value="@Model.PhoneNumber" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <h4>Vehicles Information</h4>
+
+        <div class="col-md-8 center-margin">
+            <div class="form-horizontal form-label-left">
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label class="control-label col-md-3" for="manufacture-year">Manufacture Year:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="manufacture-year" class="form-control" value="@Model.ManufactureYear" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label col-md-3" for="color">Color:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="color" class="form-control" value="@Model.Color" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label class="control-label col-md-3" for="body-type">Body Type:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="body-type" class="form-control" value="@Model.BodyType" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label col-md-3" for="rpm">RPM:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="rpm" class="form-control" value="@Model.RPM" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label class="control-label col-md-3" for="fuel-used">Fuel Used:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="fuel-used" class="form-control" value="@Model.FuelUsed" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label col-md-3" for="makers-country">Maker's Country:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="makers-country" class="form-control" value="@Model.MakersCountry" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label class="control-label col-md-3" for="number-of-cylinders">Number of Cylinders:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="number-of-cylinders" class="form-control" value="@Model.NumberOfCylinders" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label col-md-3" for="wheel-base">Wheel Base:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="wheel-base" class="form-control" value="@Model.WheelBase" disabled>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        <h4>Number Plate Information</h4>
+
+        <div class="col-md-8 center-margin">
+            <div class="form-horizontal form-label-left">
+                <div class="form-group row">
+                    <label class="control-label col-md-3" for="VehiclesNumber">
+                        Vehicle ID
+                    </label>
+                    <div class="col-md-7">
+                        <input type="text" id="VehiclesId" name="VehiclesId" value="@Model.VehiclesId" disabled class="form-control col-md-7">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-md-3" for="VehiclesNumber">
+                        Vehicle Number <span class="required">*</span>
+                    </label>
+                    <div class="col-md-7">
+                        <input type="text" id="VehiclesNumber" name="VehiclesNumber" required class="form-control col-md-7">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-md-3" for="AppointmentDate">
+                        Appointment Date <span class="required">*</span>
+                    </label>
+                    <div class="col-md-7">
+                        <input type="number" id="AppointmentDate" value="15" required name="AppointmentDate" class="form-control col-md-7">
+                    </div>
+                </div>
+                <button type="button" id="completeButton" class="btn btn-info">Complete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function () {
+        $('#completeButton').click(function () {
+            var vehiclesNumber = $('#VehiclesNumber').val();
+            var appointmentDate = $('#AppointmentDate').val();
+            var vehiclesId = $('#VehiclesId').val();
+
+            $.ajax({
+                 url: '@Url.Action("VehiclesNumberSubmit", "Licensees")',
+                type: 'POST',
+                data: {
+                    vehiclesNumber: vehiclesNumber,
+                    appointmentDate: appointmentDate,
+                    vehiclesId: vehiclesId,
+                },
+                success: function (response) {
+                    if (response === "OK") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'The operation was successful.',
+                            showCancelButton: true,
+                            cancelButtonText: 'OK',
+                            confirmButtonText: 'List'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '/Admin/Licensees/Index';
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred during the operation.'
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>

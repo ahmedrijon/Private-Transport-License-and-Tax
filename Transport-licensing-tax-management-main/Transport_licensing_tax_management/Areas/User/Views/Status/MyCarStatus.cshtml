@@ -1,0 +1,197 @@
+﻿@model Transport_licensing_tax_management.ViewModel.StatusVM;
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@{
+    var step1Title = "Not Riched";
+    var step2Title = "Not Riched";
+    var step3Title = "Not Riched";
+    var step4Title = "Not Riched";
+
+    if (Model != null)
+    {
+        var status = Model.Status;
+
+        if (status == "Pending")
+        {
+            step1Title = "Pending";
+        }
+        else if (status == "Waiting for payment")
+        {
+            step1Title = "Document Approved";
+            step2Title = "Waiting for payment (Pay before appointment Date else it not valid)";
+        }
+        else if (status == "Payment")
+        {
+            step1Title = "Document Approved";
+            step2Title = "Waiting for payment (Pay before appointment Date else it not valid)";
+            step3Title = "Your Appointment Date";
+        }
+        else if (status == "Completed")
+        {
+            step1Title = "Document Approved";
+            step2Title = "Waiting for payment (Pay before appointment Date else it not valid)";
+            step3Title = "Your Appointment Date was: ";
+            step4Title = "Appointment Date for collect Number Plate: ";
+        }
+    }
+}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Form Wizards <small>Sessions</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <!-- Smart Wizard -->
+                <div id="wizard" class="form_wizard wizard_horizontal">
+                    <ul class="wizard_steps">
+                        <li>
+                            <a href="#step-1" class="step-link" >
+                                <span class="step_no" style="background-color:#30afaf">1</span>
+                                <span class="step_descr">
+                                    Step 1<br />
+                                    <small>Document Information</small>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#step-2">
+                                <span class="step_no">2</span>
+                                <span class="step_descr">
+                                    Step 2<br />
+                                    <small>Payment Information</small>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#step-3">
+                                <span class="step_no">3</span>
+                                <span class="step_descr">
+                                    Step 3<br />
+                                    <small>Appointment Information</small>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#step-4">
+                                <span class="step_no">4</span>
+                                <span class="step_descr">
+                                    Step 4<br />
+                                    <small>Number Plate Information</small>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <br />
+                    <br />
+                    <br />
+                    <div id="step-1" class="col-md-8 center-margin">
+                        <h2 class="StepTitle">@step1Title</h2>
+                        <div class="thumbnail col-md-6">
+                            <div class="image view view-first">
+                                <img style="width: 100%; display: block;" src="https://media.istockphoto.com/id/1153672822/vector/contract-papers-document-folder-with-stamp-and-text-stack-of-agreements-document-with.jpg?s=612x612&w=0&k=20&c=kjNCXISJ69chBylPnz_pY_jDPlyus3qxB38soxW78J8=" alt="image">
+                            </div>
+                            <div class="caption">
+                                <p>@step1Title</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="step-2" class="col-md-8 center-margin">
+                        <h2 class="StepTitle">@step2Title (Payment Code: @(Model.RegSerial ?? "N/A"))</h2>
+                        <div class="thumbnail col-md-6">
+                            <div class="image view view-first">
+                                <img style="width: 100%; display: block;" src="https://media.istockphoto.com/id/1153672822/vector/contract-papers-document-folder-with-stamp-and-text-stack-of-agreements-document-with.jpg?s=612x612&w=0&k=20&c=kjNCXISJ69chBylPnz_pY_jDPlyus3qxB38soxW78J8=" alt="image">
+                            </div>
+                            <div class="caption">
+                                <p>
+                                    @step2Title, Total Payable: @Model.FeesAmount
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="step-3" class="col-md-8 center-margin">
+                        <h2 class="StepTitle">@step3Title</h2>
+                        <div class="thumbnail col-md-6">
+                            <div class="image view view-first">
+                                <img style="width: 100%; display: block;" src="https://media.istockphoto.com/id/1153672822/vector/contract-papers-document-folder-with-stamp-and-text-stack-of-agreements-document-with.jpg?s=612x612&w=0&k=20&c=kjNCXISJ69chBylPnz_pY_jDPlyus3qxB38soxW78J8=" alt="image">
+                            </div>
+                            <div class="caption">
+                                <p>@step3Title: @(Model.Appointment != DateTime.MinValue ? Model.Appointment.ToShortDateString() : "N/A")</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="step-4" class="col-md-8 center-margin">
+                        <h2 class="StepTitle">@step4Title</h2>
+                        <div class="thumbnail col-md-6">
+                            <div class="image view view-first">
+                                <img style="width: 100%; display: block;" src="https://media.istockphoto.com/id/1153672822/vector/contract-papers-document-folder-with-stamp-and-text-stack-of-agreements-document-with.jpg?s=612x612&w=0&k=20&c=kjNCXISJ69chBylPnz_pY_jDPlyus3qxB38soxW78J8=" alt="image">
+                            </div>
+                            <div class="caption">
+                                <p>@step4Title @(Model.Appointment != DateTime.MinValue ? Model.Appointment.ToShortDateString() : "N/A")</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- End SmartWizard Content -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Hide all steps except the first one initially
+        $('#wizard > div:not(#step-1)').hide();
+
+        // Handle click event on step links
+        $('.wizard_steps li a').on('click', function (e) {
+            e.preventDefault(); // Prevent the default anchor tag behavior
+
+            // Remove the style attribute from all step_no elements
+            $('.step_no').removeAttr('style');
+
+            // Get the target step's ID from the href attribute
+            var targetStep = $(this).attr('href');
+
+            // Hide all steps
+            $('#wizard > div').hide();
+
+            // Show only the selected step
+            $(targetStep).show();
+
+            // Add the style to the clicked step link's step_no element
+            $(this).find('.step_no').css('background-color', '#30afaf');
+        });
+    });
+</script>

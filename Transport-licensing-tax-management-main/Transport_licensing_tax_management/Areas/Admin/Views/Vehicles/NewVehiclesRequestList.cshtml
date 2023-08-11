@@ -1,0 +1,154 @@
+﻿@model IEnumerable<Transport_licensing_tax_management.DataModel.Vehicles>
+
+@{
+    ViewData["Title"] = "New Vehicles Registration List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                Register NID
+            </th>
+            <th>
+                Owned
+            </th>
+            <th>
+                Engine Number
+            </th>
+            <th>
+                chassis Number
+            </th>
+            <th>
+                Create_By
+            </th>
+            <th>
+                Create_At
+            </th>
+            <th>
+                Status
+            </th>
+
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegisterNID)
+                </td>
+                <td>
+                    1
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EngineNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.chassisNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Create_By)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Create_At)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+
+                <td>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#approveModal" data-id="@item.VehiclesId">Approve</button>
+                    <a class="btn btn-info btn-sm" href="@Url.Action("Details", "Vehicles", new { id = item.VehiclesId })">Details</a>
+                    <button class="btn btn-danger btn-sm dltbtn" asp-id="@item.VehiclesId">Reject</button>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- Modal -->
+<div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="approveModalLabel">Enter Date</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p hidden id="vehiclesIdDisplay"></p>
+                <input type="date" id="dateInput" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="approveButton">Submit</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#approveModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var vehiclesId = button.data('id');
+            $('#vehiclesIdDisplay').text(vehiclesId);
+        });
+
+
+        $('#approveButton').click(function () {
+            var dateInput = $('#dateInput').val();
+            var vehiclesId = $('#vehiclesIdDisplay').text();
+
+            $.ajax({
+                url: '@Url.Action("Appointment", "Vehicles")',
+                type: 'POST',
+                data: {
+                    vehiclesId: vehiclesId,
+                    date: dateInput
+                },
+                success: function (response) {
+                    if(response == "OK"){
+                        $('#approveModal').modal('hide'); // Close the modal
+                        var row = $('button[data-id="' + vehiclesId + '"]').closest('tr');
+                        row.hide();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error sending data:', error);
+                }
+            });
+        });
+
+        // Reject button click event
+        $('.dltbtn').click(function () {
+            var button = $(this);
+            var vehiclesId = button.attr('asp-id');
+            debugger;
+            $.ajax({
+                url: '@Url.Action("Reject", "Vehicles")',
+                type: 'POST',
+                data: { vehiclesId: vehiclesId },
+                success: function (response) {
+                    if (response === "OK") {
+                        // Hide the row from the table
+                        var row = button.closest('tr');
+                        row.hide();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error sending data:', error);
+                }
+            });
+        });
+
+    });
+</script>

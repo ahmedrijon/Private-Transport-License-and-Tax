@@ -1,0 +1,155 @@
+﻿@using Transport_licensing_tax_management.DataModel;
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model Payments
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-info">
+        @ViewBag.Message
+    </div>
+}
+
+<div class="x_panel col-md-6 mx-auto">
+    <div class="x_title">
+        <h2>Tax Mangment</h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                </div>
+            </li>
+            <li>
+                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li>
+                <a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_panel">
+        <form method="post" action="TakePayment">
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <select class="form-control" id="type" name="Type" required>
+                    <option value="TAX">TAX</option>
+                    <option value="NEWREG">Registration</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="PaymentCodeGroup">
+                <label for="paymentCode">Payment Code:</label>
+                <input type="text" class="form-control" id="paymentCode" name="PaymentCode" placeholder="Enter Payment Code" >
+            </div>
+            <div class="form-group" id="CarNumberGroup">
+                <label for="carNumber">Car Number:</label>
+                <input type="text" class="form-control" id="carNumber" name="CarNumber" placeholder="Enter Car Number" >
+            </div>
+            <div class="form-group" id="AmountGroup">
+                <label for="amount">Amount:</label>
+                <input disable class="form-control" id="amount" name="Amount" placeholder="Enter Amount" required>
+            </div>
+            
+            <div class="form-group" id="taxyearGroup">
+                <label>Year:</label>
+                <input type="number" min="1" value="1" class="form-control" id="taxyear" name="taxyear">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let temp=0;
+        $('#paymentCode').on('keyup', function () {
+            var paymentCode = $(this).val();
+            var paymentType = $("#type").val();
+            if (paymentCode) {
+               
+                $.ajax({
+                    url: '@Url.Action("GetAmount", "Payments")',
+                    type: 'POST',
+                    data: { paymentCode: paymentCode, paymentType: paymentType },
+                    success: function (result) {
+                       
+                        $('#amount').val(result); 
+                        temp= result;
+                    },
+                    error: function () {
+                       
+                    }
+                });
+            }
+        });
+        $('#carNumber').on('keyup', function () {
+            var carNumber = $(this).val();
+            var paymentType = $("#type").val();
+            if (paymentCode) {
+               debugger;
+                $.ajax({
+                    url: '@Url.Action("GetTaxAmount", "Payments")',
+                    type: 'POST',
+                    data: { carNumber: carNumber, paymentType: paymentType },
+                    success: function (result) {
+                       
+                        $('#amount').val(result); 
+                        temp = result;
+                    },
+                    error: function () {
+                       
+                    }
+                });
+            }
+        });
+
+        $('#type').on('change', function () {
+            //var paymentCode = $('#paymentCode').val();
+            //var paymentType = $(this).val();
+            var selectedType = $(this).val();
+            if (selectedType === 'TAX') {
+                $('#PaymentCodeGroup').hide();
+                $('#CarNumberGroup').show();
+                $('#taxyearGroup').show();
+            } else if (selectedType === 'NEWREG') {
+                $('#PaymentCodeGroup').show();
+                $('#CarNumberGroup').hide();
+                $('#taxyearGroup').hide();
+            }
+
+            if (paymentCode && paymentType == "NEWREG" && paymentCode.length == 8) {
+               
+                $.ajax({
+                    url: '@Url.Action("GetAmount", "Payments")',
+                    type: 'POST',
+                    data: { paymentCode: paymentCode, paymentType: paymentType },
+                    success: function (result) {
+                        
+                        $('#amount').val(result);
+                        temp = result;
+                    },
+                    error: function () {
+                        // Handle error
+                    }
+                });
+            }
+        });
+
+        $('#taxyear').on('input', function () {
+            var year = parseInt($(this).val());
+            var amount = parseInt($('#amount').val());
+            if (year < 1) {
+                year = 1;
+                $(this).val(year);
+            }
+            
+            var result = temp * year;
+            $('#amount').val(result);
+        });
+
+    });
+</script>

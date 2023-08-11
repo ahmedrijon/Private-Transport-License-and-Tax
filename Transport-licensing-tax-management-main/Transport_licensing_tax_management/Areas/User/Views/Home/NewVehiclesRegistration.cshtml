@@ -1,0 +1,199 @@
+﻿
+@{
+    ViewData["Title"] = "NewVehiclesRegistration";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-sm-8">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>New Vehicles Registration</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content col-md-12">
+                <form id="VehiclesRegistrationForm">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="EngineNumber" class="control-label">Engine Number</label>
+                                <input asp-for="EngineNumber" name="EngineNumber" class="form-control" required />
+                                <span asp-validation-for="EngineNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="EngineCC" class="control-label">Engine Power (CC)</label>
+                                <input asp-for="EngineCC" name="EngineCC" class="form-control" required placeholder="1500" />
+                                <span asp-validation-for="EngineCC" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="chassisNumber" class="control-label">Chassis Number</label>
+                                <input asp-for="chassisNumber" name="chassisNumber" class="form-control" required />
+                                <span asp-validation-for="chassisNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="RegisterName" class="control-label">Register Name</label>
+                                <input asp-for="RegisterName" name="RegisterName" class="form-control" required />
+                                <span asp-validation-for="RegisterName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="RegisterNID" class="control-label">Register NID</label>
+                                <input asp-for="RegisterNID" name="RegisterNID" class="form-control" required />
+                                <span asp-validation-for="RegisterNID" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Nationality" class="control-label">Nationality</label>
+                                <input asp-for="Nationality" name="Nationality" class="form-control" required />
+                                <span asp-validation-for="Nationality" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Bank" class="control-label">Bank</label>
+                                <input asp-for="Bank" name="Bank" class="form-control" />
+                                <span asp-validation-for="Bank" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
+                                <input asp-for="PhoneNumber" name="PhoneNumber" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="ManufactureYear" class="control-label">Manufacture Year</label>
+                                <input asp-for="ManufactureYear" name="ManufactureYear" class="form-control" required />
+                                <span asp-validation-for="ManufactureYear" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Color" class="control-label">Color</label>
+                                <input asp-for="Color" name="Color" class="form-control" />
+                                <span asp-validation-for="Color" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="BodyType" class="control-label">Body Type</label>
+                                <input asp-for="BodyType" name="BodyType" class="form-control" />
+                                <span asp-validation-for="BodyType" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="RPM" class="control-label">RPM</label>
+                                <input asp-for="RPM" name="RPM" class="form-control" />
+                                <span asp-validation-for="RPM" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="FuelUsed" class="control-label">Fuel Used</label>
+                                <input asp-for="FuelUsed" name="FuelUsed" class="form-control" />
+                                <span asp-validation-for="FuelUsed" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="MakersCountry" class="control-label">Maker's Country</label>
+                                <input asp-for="MakersCountry" name="MakersCountry" class="form-control" />
+                                <span asp-validation-for="MakersCountry" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="NumberOfCylinders" class="control-label">Number of Cylinders</label>
+                                <input asp-for="NumberOfCylinders" name="NumberOfCylinders" class="form-control" required />
+                                <span asp-validation-for="NumberOfCylinders" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="WheelBase" class="control-label">Wheel Base</label>
+                                <input asp-for="WheelBase" name="WheelBase" class="form-control" />
+                                <span asp-validation-for="WheelBase" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#VehiclesRegistrationForm').submit(function (e) {
+            e.preventDefault();
+            // Get the form data
+            var formData = $(this).serialize();
+
+            // Send an AJAX request
+            $.ajax({
+                url: '@Url.Action("NewVehiclesRegistration", "Home")',
+                type: 'POST',
+                data: formData,
+                success: function (result) {
+                    Swal.fire({
+                        icon: result.icon,
+                        title: result.title,
+                        text: result.message
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+

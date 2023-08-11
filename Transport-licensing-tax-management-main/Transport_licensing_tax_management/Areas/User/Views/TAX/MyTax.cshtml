@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Transport_licensing_tax_management.ViewModel.TaxesVM>
+@{
+
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+}
+
+
+<div class="x_panel col-md-6 ">
+    <div class="x_title">
+        <h2>Tax Management</h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                </div>
+            </li>
+            <li>
+                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li>
+                <a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_panel">
+        <form method="get" action="@Url.Action("MyTax", "TAX")">
+            <div class="form-group row">
+                <label class="col-form-label col-md-3 col-sm-3" for="enginePowerS">Vehicle Name:</label>
+                <div class="col-md-9 col-sm-9">
+                    <input type="text" class="form-control" id="CarNumber" name="CarNumber" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <hr />
+        <div class="last-payment-info">
+            @if(Model != null)
+            {
+                <h4>Last Payment Information</h4>
+                <p>Last Payment Date: @Model.LastOrDefault()?.Issu_Date.ToShortDateString()</p>
+                <p>Fees: @Model.LastOrDefault()?.Fees.ToString("0.00")</p>
+                <p>Expiration Date: @Model.LastOrDefault()?.Expired_Date.ToShortDateString()</p>
+            }
+            
+        </div>
+
+
+    </div>
+</div>
+
+<div class="x_panel col-md-6 ">
+    <div class="x_title">
+        <h2>Tax History</h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                </div>
+            </li>
+            <li>
+                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li>
+                <a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_panel">
+
+        <div class="x_content">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Register NID</th>
+                        <th>Issu Date</th>
+                        <th>Expired Date</th>
+                        <th>Fees</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.TaxesHistory != null)
+                    {
+                        foreach (var registrationFee in Model)
+                        {
+                            <tr>
+                                <td>1</td>
+                                <td>@registrationFee.RegisterNID</td>
+                                <td>@registrationFee.Issu_Date</td>
+                                <td>@registrationFee.Expired_Date</td>
+                                <td>@registrationFee.Fees</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">No tax history available.</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+    });
+    function redirectToMyCarStatus(url) {
+        window.location.href = url;
+    }
+</script>

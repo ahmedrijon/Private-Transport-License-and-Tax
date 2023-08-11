@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<!-- Header-->
+<header class="text-dark" style="margin-top:90px;">
+    <div class="container px-4 text-center">
+        <h1 class="fw-bolder">Private Transport License And Tax Management System</h1>
+        <h2>Bangladesh Road Transport Authority</h2>
+        <p class="lead">Government of the People's Republic of Bangladesh </p>
+
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <div class="container-fluid px-4">
+            <h1 class="mt-4 text-dark text-center">User's Portal</h1>
+
+            <div class="row">
+                <div class="col-xl-4 col-md-6">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">Registration</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" asp-action="NewVehiclesRegistration" asp-controller="Home" asp-area="User">Apply For Registration</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">Status</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" asp-action="MyCarList" asp-controller="Status" asp-area="User">Show Status</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">TAX</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" asp-action="MyTax" asp-controller="TAX" asp-area="User">See Tax Information</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,41 @@
+﻿<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+
+            <li>
+                <a asp-action="Index" asp-controller="Dashboard"><i class="fa fa-home"></i> Admin Dashboard</a>
+            </li>
+            <li>
+                <a asp-action="Index" asp-controller="Licensees"><i class="fa fa-list-ol"></i> New Number Plate</a>
+            </li>
+            <li>
+                <a asp-action="RegisteredVehicles" asp-controller="Vehicles"><i class="fa fa-paperclip"></i> Registered Vehicles</a>
+            </li>
+
+            <li>
+                <a><i class="fa fa-car"></i>Vehicles Management <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a asp-action="NewVehiclesRegistration" asp-controller="Vehicles">Registration Request</a></li>
+                    <li><a asp-action="NewVehiclesRequestList" asp-controller="Vehicles">New Request</a></li>
+                    <li><a asp-action="PendingVehiclesRequestList" asp-controller="Vehicles">Pending Payment</a></li>
+                </ul>
+            </li>
+          
+            <li>
+                <a><i class="fa fa-money"></i>Payments Management <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a asp-action="Taxes" asp-controller="Payments">Tax</a></li>
+                    <li><a asp-action="NewCarFees" asp-controller="Payments">New Car Registration</a></li>
+                    <li><a asp-action="TakePayment" asp-controller="Payments">Take Payment</a></li>
+                    <li><a asp-action="PaymentReport" asp-controller="Payments">Report</a></li>
+                </ul>
+            </li>
+          
+            <li>
+                <a asp-action="Index" asp-controller="Notices" asp-area="Admin"><i class="fa fa-info-circle"></i> FAQ</a>
+            </li>
+
+        </ul>
+    </div>
+</div>

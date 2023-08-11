@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Transport_licensing_tax_management.DataModel.Vehicles>
+
+@{
+    ViewData["Title"] = "New Vehicles Registration List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                Register NID
+            </th>
+            <th>
+                Owned
+            </th>
+            <th>
+                Engine Number
+            </th>
+            <th>
+                chassis Number
+            </th>
+            <th>
+                Create_By
+            </th>
+            <th>
+                Create_At
+            </th>
+            <th>
+                Status
+            </th>
+
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegisterNID)
+                </td>
+                <td>
+                    1
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EngineNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.chassisNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Create_By)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Create_At)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+
+                <td>
+                    <a class="btn btn-info btn-sm" href="@Url.Action("Details", "Vehicles", new { id = item.VehiclesId })">Details</a>
+                    <button class="btn btn-danger btn-sm dltbtn" asp-id="@item.VehiclesId">Reject</button>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Reject button click event
+        $('.dltbtn').click(function () {
+            var button = $(this);
+            var vehiclesId = button.attr('asp-id');
+            debugger;
+            $.ajax({
+                url: '@Url.Action("Reject", "Vehicles")',
+                type: 'POST',
+                data: { vehiclesId: vehiclesId },
+                success: function (response) {
+                    if (response === "OK") {
+                        // Hide the row from the table
+                        var row = button.closest('tr');
+                        row.hide();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error sending data:', error);
+                }
+            });
+        });
+
+    });
+       
+</script>
+
