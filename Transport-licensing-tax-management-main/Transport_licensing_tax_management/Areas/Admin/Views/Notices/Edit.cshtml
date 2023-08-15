@@ -2,43 +2,68 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>Notices</h4>
+<h1>Edit Notices</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+     <form id="UpdateForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Heading" class="control-label"></label>
-                <input asp-for="Heading" class="form-control" />
+                <label asp-for="Heading" class="control-label">Heading</label>
+                <input asp-for="Heading" name="Heading" value="@Model.Heading" class="form-control" />
                 <span asp-validation-for="Heading" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Detail" class="control-label"></label>
-                <input asp-for="Detail" class="form-control" />
+               
+                <label asp-for="Detail" class="control-label">Detail</label>
+                <input asp-for="Detail" name="Detail" value="@Model.Detail" class="form-control" />
                 <span asp-validation-for="Detail" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
+              @*  <label asp-for="Date" class="control-label">Date</label>*@
+             <input type="hidden" asp-for="Date" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
+           @*     <input asp-for="Date" name="Date" value="@Model.Date" data-id="@Model.Date" disabled class="form-control" />*@
             </div>
+            <input asp-for="Id" hidden name="Id" value="@Model.Id" class="form-control" />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Update" class="btn btn-success btn-sm" /> |
+                <a class="btn btn-secondary btn-sm text-white" href="@Url.Action("Index", "Notices")">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<script>
+    $(document).ready(function () {
+        $('#UpdateForm').submit(function (e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            var indexPageUrl = 'Index';
+            $.ajax({
+                url: '@Url.Action("Edit", "Notices")',
+                type: 'POST',
+                data: formData,
+                success: function (result) {
+                    Swal.fire({
+                        icon: result.icon,
+                        title: result.title,
+                        text: result.message
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = indexPageUrl;
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>

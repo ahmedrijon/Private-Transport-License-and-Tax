@@ -23,7 +23,24 @@ namespace Transport_licensing_tax_management.Areas.Admin.Controllers
        
         public IActionResult Index()
         {
+            //vehicles complete
+            var vehicles = _context.Vehicles.Where(x => x.Status == "Completed").ToList();
+            ViewBag.Vehicles = vehicles.Count();
+
+            //vehicles pending
+            var pending = _context.Vehicles.Where(x => x.Status == "Pending").ToList();
+            ViewBag.PendingReq = pending.Count();
+
+            //vehicles payment 
+            var payment = _context.Vehicles.Where(x => x.Status == "Waiting for payment").ToList();
+            ViewBag.Payment = payment.Count();
+
+            //notice
+            var n = _context.Notices.ToList();
+            ViewBag.Notice = n.Count();
+ 
             return View();
+           
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

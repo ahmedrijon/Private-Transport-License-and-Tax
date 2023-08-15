@@ -9,7 +9,6 @@ namespace Transport_licensing_tax_management.DataModel
         public string Heading { get; set; }
         [Required]
         public string Detail { get; set; }
-        [Required]
         public string Date { get; set; }
     }
 }

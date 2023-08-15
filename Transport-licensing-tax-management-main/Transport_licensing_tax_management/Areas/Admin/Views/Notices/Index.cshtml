@@ -2,14 +2,17 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Notice</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary btn-sm text-white" href="@Url.Action("Create", "Notices")">Create New</a>
 </p>
-<table class="table">
+
+
+<table class="table text-center">
     <thead>
         <tr>
             <th>
@@ -21,7 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Date)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -37,11 +40,41 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-primary btn-sm text-white" data-id="@item.Id">Edit</a> |
+                    <a href="#" class="delete-link btn btn-danger btn-sm text-white" data-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.delete-link').click(function () {
+            var id = $(this).data('id');
+            var indexPageUrl = 'Index';
+            $.ajax({
+                url: '@Url.Action("Delete", "Notices")/' + id,
+                type: 'POST',
+                success: function (result) {
+                    Swal.fire({
+                        icon: result.icon,
+                        title: result.title,
+                        text: result.message
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = indexPageUrl;
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+
+</script>

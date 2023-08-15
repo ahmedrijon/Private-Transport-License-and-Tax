@@ -1,4 +1,55 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<h1>this is admin dashboard</h1>
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+</head>
+
+<div class="grey-bg">
+    <section id="minimal-statistics">
+        <div class="row">
+            <div class="col-12 mt-3 mb-1">
+                <h4 class="text-uppercase">BRTA DASHBOARD</h4>
+                <p>Dashboard</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card mr-4" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Registered Vehicle</h5>
+                    <div class="row">
+                        <div class="col-8"> <i class='fas fa-car p-2' style='font-size:48px;color:green'></i></div>
+                        <div class="col-4"> <h1 class="card-text">@ViewBag.Vehicles </h1></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mr-4" style="width: 14rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Payment</h5>
+                    <div class="row">
+                        <div class="col-8"><i class="fab fa-cc-visa p-2" style='font-size:48px;'></i></div>
+                        <div class="col-4"> <h1 class="card-text">@ViewBag.Payment </h1></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mr-4" style="width: 16rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Pending Request</h5>
+                    <div class="row">
+                        <div class="col-8"><i class="fa fa-clock-o p-2" style='font-size:48px;color:red'></i></div>
+                        <div class="col-4"> <h1 class="card-text">@ViewBag.PendingReq </h1></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mr-4" style="width: 14rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Total Notice</h5>
+                    <div class="row">
+                        <div class="col-8"><i class="fas fa-bell p-2" style='font-size:48px;'></i></div>
+                        <div class="col-4"> <h1 class="card-text">@ViewBag.Notice </h1></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

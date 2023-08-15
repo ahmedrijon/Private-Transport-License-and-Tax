@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Transport_licensing_tax_management.DataModel.Notices>
+@{
+    ViewData["Title"] = "Notice Board";
+    Layout = "_UserLayout";
+}
+<div class="card mt-4" style="width: 100%;">
+    <div class="card-body">
+        <h1 class="card-title text-center">Notice</h1>
+         <div class="tgroup">
+            <table class="table table-bordered text-center border-dark">
+                <thead>
+                    <tr class="table-primary">
+                        <th>
+                            SL
+                        </th>
+
+                        <th>
+                            Heading
+                        </th>
+                        <th>
+                            Details
+                        </th>
+                        <th>
+                            Date
+                        </th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @i
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Heading)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Detail)
+                            </td>
+                            <td>
+
+                               @Html.DisplayFor(modelItem => item.Date)
+
+                            </td>
+
+
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+   </div>
+</div>

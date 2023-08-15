@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>User Portal </title>
+
+    <!-- Bootstrap -->
+    <link href="~/Admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/Admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/Admin/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- jQuery custom content scroller -->
+    <link href="~/Admin/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+
+    <!-- Custom Theme Style -->
+    <link href="~/Admin/build/css/custom.min.css" rel="stylesheet">
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .fullscreen {
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="nav-md">
+    <div class="container body" style="background-color: #F7F7F7;">
+        <div class="main_container">
+           
+            <!-- top navigation -->
+
+            <nav class="navbar navbar-expand-sm navbar-light justify-content-end" style="background: #2A3F54;">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-action="Index" asp-controller="Home" asp-area="User">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="NewVehiclesRegistration" asp-controller="Home" asp-area="User">Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="MyCarList" asp-controller="Status" asp-area="User">Status</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="MyTax" asp-controller="TAX" asp-area="User">TAX</a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Dashboard", new { area = "Admin" })">
+                            <button class="nav-link">Logout</button>
+                        </form>
+                    </li>
+
+                </ul>
+            </nav>
+            <!-- /top navigation -->
+
+            <!-- page content -->
+            <div class="fullscreen">
+                @RenderBody()
+            </div>
+            <!-- /page content -->
+           
+            <!-- footer content -->
+      
+               
+                <div class="clearfix">
+                    <div class="justify-content-center">
+                        ERP - Develop by <a href="" target="_blank">Rejoan Ahmed</a>
+                    </div>
+
+                </div>
+         
+            <!-- /footer content -->
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="~/Admin/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Admin/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Admin/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/Admin/vendors/nprogress/nprogress.js"></script>
+    <!-- jQuery custom content scroller -->
+    <script src="~/Admin/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="~/Admin/build/js/custom.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</body>
+</html>*

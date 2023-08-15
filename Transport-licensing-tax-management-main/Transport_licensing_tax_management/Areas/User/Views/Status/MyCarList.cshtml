@@ -2,83 +2,69 @@
 @{
 
     Layout = "~/Views/Shared/_UserLayout.cshtml";
-
+    int i = 1;
 }
 
-
-<div class="row justify-content-center">
-
-    <div class="col-md-10 col-sm-10 ">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>My New Car Request</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li>
-                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-
-
-                <table id="myTable" class="table">
-                    <thead>
-                        <tr>
-                            <th>SL</th>
-                            <th>Create At</th>
-                            <th>Reg Serial</th>
-                            <th>Engine Number</th>
-                            <th>Chassis Number</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model != null && Model.Any())
-                        {
-                            @foreach (var vehicle in Model)
-                            {
-                                <tr onclick="redirectToMyCarStatus('@Url.Action("MyCarStatus", new { VehiclesId = @vehicle.VehiclesId })')">
-
-                                    <td>@vehicle.VehiclesId</td>
-                                    <td>@vehicle.Create_At</td>
-                                    <td>@vehicle.RegSerial</td>
-                                    <td>@vehicle.EngineNumber</td>
-                                    <td>@vehicle.chassisNumber</td>
-                                    <td>@vehicle.Status</td>
-                                    <td>
-                                        @if (vehicle.Status == "Pending")
-                                        {
-                                            <a href="@Url.Action("UpdateInfo", new { VehiclesId = @vehicle.VehiclesId })" class="btn btn-primary">Edit</a>
-                                        }
-                                    </td>
-                                </tr>
-                            }
-                        }
-                        else
+<div class="card mt-4" style="width: 100%;">
+    <div class="card-body">
+        <h1 class="card-title text-center">My New Car Request</h1>
+        <div class="x_content">
+            <table id="myTable" class="table text-center">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Create At</th>
+                        <th>Reg Serial</th>
+                        <th>Engine Number</th>
+                        <th>Chassis Number</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var vehicle in Model)
                         {
                             <tr>
-                                <td colspan="6">No vehicles found.</td>
+
+                                <td>@i</td>
+                                <td>@vehicle.Create_At</td>
+                                <td>@vehicle.RegSerial</td>
+                                <td>@vehicle.EngineNumber</td>
+                                <td>@vehicle.chassisNumber</td>
+                                <td>@vehicle.Status</td>
+                               
+                                 @* else if(vehicle.Status=="Payment")
+                                   {
+                                     <td>Payment</td>
+                                    }*@
+                                <td>
+                                @if (vehicle.Status == "Pending")
+                                {
+                                        <a href="@Url.Action("UpdateInfo", new { VehiclesId = @vehicle.VehiclesId })" style="background-color:dodgerblue" class="btn btn-sm text-white">Edit</a>
+                                    }
+                                    <button class="btn btn-warning btn-sm" onclick="redirectToMyCarStatus('@Url.Action("MyCarStatus", new { VehiclesId = @vehicle.VehiclesId })')">View Process</button>
+                           </td>
+                                
                             </tr>
+                            i++;
                         }
-                </table>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">No vehicles found.</td>
+                        </tr>
+                    }
+                   
+            </table>
 
-                <!-- End SmartWizard Content -->
+            <!-- End SmartWizard Content -->
 
-            </div>
         </div>
     </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

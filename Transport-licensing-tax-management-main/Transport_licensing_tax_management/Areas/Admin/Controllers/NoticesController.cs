@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Transport_licensing_tax_management.Data;
 using Transport_licensing_tax_management.DataModel;
+using Transport_licensing_tax_management.Migrations;
 
 namespace Transport_licensing_tax_management.Areas.Admin.Controllers
 {
@@ -22,16 +24,17 @@ namespace Transport_licensing_tax_management.Areas.Admin.Controllers
         {
             _context = context;
         }
+        
 
         // GET: Admin/Notices
         public async Task<IActionResult> Index()
         {
-              return _context.Notices != null ? 
-                          View(await _context.Notices.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Notices'  is null.");
+            return _context.Notices != null ?
+                        View(await _context.Notices.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Notices'  is null.");
         }
 
-        // GET: Admin/Notices/Details/5
+        //// GET: Admin/Notices/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Notices == null)
@@ -49,119 +52,133 @@ namespace Transport_licensing_tax_management.Areas.Admin.Controllers
             return View(notices);
         }
 
-        // GET: Admin/Notices/Create
+        //// GET: Admin/Notices/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Notices/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Heading,Detail,Date")] Notices notices)
+        public async Task<IActionResult> Create(Notices model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(notices);
+                _context.Add(model);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+               
+                return Json(new
+                {
+                    icon = "success",
+                    message = "completed",
+                    title = "Success"
+                    
+                });
+               
             }
-            return View(notices);
+            else
+            {
+                return Json(new
+                {
+                    icon = "error",
+                    message = "Duplicate found",
+                    title = "Error"
+                });
+            }
         }
 
-        // GET: Admin/Notices/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int Id)
         {
-            if (id == null || _context.Notices == null)
+            var notice = _context.Notices.FirstOrDefault(x => x.Id == Id);
+            if (notice == null)
             {
                 return NotFound();
             }
-
-            var notices = await _context.Notices.FindAsync(id);
-            if (notices == null)
-            {
-                return NotFound();
-            }
-            return View(notices);
+            return View(notice);
         }
-
-        // POST: Admin/Notices/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Heading,Detail,Date")] Notices notices)
+        public async Task<IActionResult> Edit(Notices model)
         {
-            if (id != notices.Id)
+            var notice = _context.Notices.FirstOrDefault(x => x.Id == model.Id);
+            if (notice != null)
             {
-                return NotFound();
-            }
+                if (ModelState.IsValid)
+                {  
+                    notice.Heading = model.Heading;
+                    notice.Detail = model.Detail;
+                    notice.Date = model.Date;
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(notices);
+                    _context.Update(notice);
                     await _context.SaveChangesAsync();
+
+                    return Json(new
+                    {
+                        icon = "success",
+                        message = "Notice updated",
+                        title = "Success"
+                    });
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!NoticesExists(notices.Id))
+                    return Json(new
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                        icon = "error",
+                        message = "Invalid input data",
+                        title = "Error"
+                    });
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(notices);
+            else
+            {
+                return Json(new
+                {
+                    icon = "error",
+                    message = "Notice not found",
+                    title = "Error"
+                });
+            }
         }
 
-        // GET: Admin/Notices/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Notices == null)
+            var entity = await _context.Notices.FindAsync(id);
+            if (entity == null)
             {
                 return NotFound();
             }
 
-            var notices = await _context.Notices
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (notices == null)
+            try
             {
-                return NotFound();
+                _context.Notices.Remove(entity);
+                await _context.SaveChangesAsync();
+
+                return Json(new
+                {
+                    icon = "success",
+                    message = "Deleted successfully",
+                    title = "Success"
+                });
             }
-
-            return View(notices);
+            catch
+            {
+                return Json(new
+                {
+                    icon = "error",
+                    message = "Error deleting",
+                    title = "Error"
+                });
+            }
         }
-
-        // POST: Admin/Notices/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Notice()
         {
-            if (_context.Notices == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Notices'  is null.");
-            }
-            var notices = await _context.Notices.FindAsync(id);
-            if (notices != null)
-            {
-                _context.Notices.Remove(notices);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return _context.Notices != null ?
+                        View(await _context.Notices.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Notices'  is null.");
         }
-
         private bool NoticesExists(int id)
         {
-          return (_context.Notices?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Notices?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

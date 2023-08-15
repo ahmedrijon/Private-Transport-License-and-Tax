@@ -111,7 +111,13 @@ namespace Transport_licensing_tax_management.Areas.Admin.Controllers
             var PaymentReport = _context.Payments.OrderByDescending(x=>x.PaymentsID).ToList();
             return View(PaymentReport);
         }
-        
+
+        public async Task<IActionResult> PaymentReportPDF()
+        {
+            var PaymentReport = _context.Payments.OrderByDescending(x => x.PaymentsID).ToList();
+            return View(PaymentReport);
+
+        }
         public IActionResult TakePayment()
         {
             return View();

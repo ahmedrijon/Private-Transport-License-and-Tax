@@ -1,43 +1,66 @@
-﻿@model Transport_licensing_tax_management.DataModel.Notices
-
+﻿
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>Notices</h4>
+<h1>Create Notices</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form id="NoticeForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Heading" class="control-label"></label>
-                <input asp-for="Heading" class="form-control" />
+                <label asp-for="Heading" class="control-label">Heading</label>
+                <input asp-for="Heading" name="Heading" class="form-control" />
                 <span asp-validation-for="Heading" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Detail" class="control-label"></label>
-                <input asp-for="Detail" class="form-control" />
+                <label asp-for="Detail" class="control-label">Detail</label>
+                <input asp-for="Detail" name="Detail" class="form-control" />
                 <span asp-validation-for="Detail" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
+                <input type="hidden" asp-for="Date" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary btn-sm" /> |
+                <a class="btn btn-secondary btn-sm text-white" href="@Url.Action("Index", "Notices")">Back to List</a>
             </div>
         </form>
+         
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<script>
+    $(document).ready(function () {
+        $('#NoticeForm').submit(function (e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            var indexPageUrl = 'Index'; 
+            $.ajax({
+                url: '@Url.Action("Create", "Notices")',
+                type: 'POST',
+                data: formData,
+                success: function (result) {
+                    Swal.fire({
+                        icon: result.icon,
+                        title: result.title,
+                        text: result.message
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = indexPageUrl;
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+
+</script>

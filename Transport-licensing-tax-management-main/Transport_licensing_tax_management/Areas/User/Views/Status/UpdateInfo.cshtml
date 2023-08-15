@@ -7,22 +7,9 @@
 
 <div class="row justify-content-center">
     <div class="col-md-8 col-sm-8">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>New Vehicles Registration<small>Update info</small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        </div>
-                    </li>
-                    <li>
-                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li>
-                        <a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                </ul>
+        <div class="x_panel mt-2">
+            <div class="x_title ">
+                <h2 class="text-center">New Vehicles Registration Update info</h2>
                 <div class="clearfix"></div>
             </div>
 
@@ -159,7 +146,7 @@
                         </div>
                     </div>
                     <input asp-for="VehiclesId" hidden name="VehiclesId" value="@Model.VehiclesId" class="form-control" />
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input type="submit" value="Update Information" class="btn btn-primary" />
                     </div>
                 </form>
