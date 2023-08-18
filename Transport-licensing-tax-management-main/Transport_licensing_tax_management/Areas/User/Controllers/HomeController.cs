@@ -56,15 +56,13 @@ namespace Transport_licensing_tax_management.Areas.User.Controllers
             }
         }
 
+
         public IActionResult Profile()
         {
-            return View();
-        }
-        public async Task<IActionResult> Notice()
-        {
-            return _context.Notices != null ?
-                        View(await _context.Notices.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Notices'  is null.");
+            var userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var CarList = _context.Vehicles.Where(x => x.Create_By == userID && x.Status == "Completed").ToList();
+            return View(CarList);
+
         }
 
     }
