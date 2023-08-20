@@ -6,14 +6,24 @@
 
 @if (!string.IsNullOrEmpty(ViewBag.Message))
 {
-    <div class="alert alert-info">
+    @* <div class="alert alert-info">
         @ViewBag.Message
-    </div>
+    </div>*@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+        Swal.fire({
+            
+            title: '@ViewBag.Message',
+            timer: 1500
+        })
+    </script>
+
 }
 
 <div class="x_panel col-md-6 mx-auto">
     <div class="x_title">
-        <h2>Tax Mangment</h2>
+        <h2>Payment Management System</h2>
         <ul class="nav navbar-right panel_toolbox">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
@@ -41,17 +51,17 @@
 
             <div class="form-group" id="PaymentCodeGroup">
                 <label for="paymentCode">Payment Code:</label>
-                <input type="text" class="form-control" id="paymentCode" name="PaymentCode" placeholder="Enter Payment Code" >
+                <input type="text" class="form-control" id="paymentCode" name="PaymentCode" placeholder="Enter Payment Code">
             </div>
             <div class="form-group" id="CarNumberGroup">
                 <label for="carNumber">Car Number:</label>
-                <input type="text" class="form-control" id="carNumber" name="CarNumber" placeholder="Enter Car Number" >
+                <input type="text" class="form-control" id="carNumber" name="CarNumber" placeholder="Enter Car Number">
             </div>
             <div class="form-group" id="AmountGroup">
                 <label for="amount">Amount:</label>
                 <input disable class="form-control" id="amount" name="Amount" placeholder="Enter Amount" required>
             </div>
-            
+
             <div class="form-group" id="taxyearGroup">
                 <label>Year:</label>
                 <input type="number" min="1" value="1" class="form-control" id="taxyear" name="taxyear">
@@ -65,23 +75,23 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-        let temp=0;
+        let temp = 0;
         $('#paymentCode').on('keyup', function () {
             var paymentCode = $(this).val();
             var paymentType = $("#type").val();
             if (paymentCode) {
-               
+
                 $.ajax({
                     url: '@Url.Action("GetAmount", "Payments")',
                     type: 'POST',
                     data: { paymentCode: paymentCode, paymentType: paymentType },
                     success: function (result) {
-                       
-                        $('#amount').val(result); 
-                        temp= result;
+
+                        $('#amount').val(result);
+                        temp = result;
                     },
                     error: function () {
-                       
+
                     }
                 });
             }
@@ -90,18 +100,18 @@
             var carNumber = $(this).val();
             var paymentType = $("#type").val();
             if (paymentCode) {
-               debugger;
+                debugger;
                 $.ajax({
                     url: '@Url.Action("GetTaxAmount", "Payments")',
                     type: 'POST',
                     data: { carNumber: carNumber, paymentType: paymentType },
                     success: function (result) {
-                       
-                        $('#amount').val(result); 
+
+                        $('#amount').val(result);
                         temp = result;
                     },
                     error: function () {
-                       
+
                     }
                 });
             }
@@ -122,13 +132,13 @@
             }
 
             if (paymentCode && paymentType == "NEWREG" && paymentCode.length == 8) {
-               
+
                 $.ajax({
                     url: '@Url.Action("GetAmount", "Payments")',
                     type: 'POST',
                     data: { paymentCode: paymentCode, paymentType: paymentType },
                     success: function (result) {
-                        
+
                         $('#amount').val(result);
                         temp = result;
                     },
@@ -146,7 +156,7 @@
                 year = 1;
                 $(this).val(year);
             }
-            
+
             var result = temp * year;
             $('#amount').val(result);
         });

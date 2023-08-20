@@ -41,8 +41,9 @@
                             <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Register NID</th>
-                                    <th>Issu Date</th>
+                                    <th>Vehicle No.</th>
+                                    <th>NID</th>
+                                    <th>Issue Date</th>
                                     <th>Expired Date</th>
                                     <th>Fees</th>
 
@@ -51,15 +52,18 @@
                             <tbody>
                                 @if (ViewBag.TaxesHistory != null)
                                 {
+                                    int i = 1;
                                     foreach (var registrationFee in Model)
                                     {
                                         <tr>
-                                            <td>1</td>
+                                            <td>@i</td>
+                                            <td>@registrationFee.VehiclesNumber</td>
                                             <td>@registrationFee.RegisterNID</td>
                                             <td>@registrationFee.Issu_Date</td>
                                             <td>@registrationFee.Expired_Date</td>
                                             <td>@registrationFee.Fees</td>
                                         </tr>
+                                        i++;
                                     }
                                 }
                                 else

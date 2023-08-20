@@ -160,6 +160,7 @@
                     <label class="control-label col-md-3" for="AppointmentDate">
                         Appointment Date <span class="required">*</span>
                     </label>
+                    @*Appointment Date Set to 15*@
                     <div class="col-md-7">
                         <input type="number" id="AppointmentDate" value="15" required name="AppointmentDate" class="form-control col-md-7">
                     </div>
@@ -205,7 +206,7 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'An error occurred during the operation.'
+                            text: 'Number Plate Alredy Used!'
                         });
                     }
                 },

@@ -97,7 +97,11 @@ namespace Transport_licensing_tax_management.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+
+                        // Set the user role to "User"
+                        await _userManager.AddToRoleAsync(user, "User");
+
+                        return Redirect($"/Identity/Account/Login?returnUrl={"/User/Home"}");
                     }
                 }
                 foreach (var error in result.Errors)

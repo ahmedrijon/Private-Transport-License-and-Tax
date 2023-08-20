@@ -34,19 +34,19 @@
                                 <td>@vehicle.EngineNumber</td>
                                 <td>@vehicle.chassisNumber</td>
                                 <td>@vehicle.Status</td>
-                               
-                                 @* else if(vehicle.Status=="Payment")
-                                   {
-                                     <td>Payment</td>
-                                    }*@
+
+                                @* else if(vehicle.Status=="Payment")
+                        {
+                        <td>Payment</td>
+                        }*@
                                 <td>
-                                @if (vehicle.Status == "Pending")
-                                {
+                                    @if (vehicle.Status == "Pending")
+                                    {
                                         <a href="@Url.Action("UpdateInfo", new { VehiclesId = @vehicle.VehiclesId })" style="background-color:dodgerblue" class="btn btn-sm text-white">Edit</a>
                                     }
                                     <button class="btn btn-warning btn-sm" onclick="redirectToMyCarStatus('@Url.Action("MyCarStatus", new { VehiclesId = @vehicle.VehiclesId })')">View Process</button>
-                           </td>
-                                
+                                </td>
+
                             </tr>
                             i++;
                         }
@@ -57,7 +57,7 @@
                             <td colspan="6">No vehicles found.</td>
                         </tr>
                     }
-                   
+
             </table>
 
             <!-- End SmartWizard Content -->

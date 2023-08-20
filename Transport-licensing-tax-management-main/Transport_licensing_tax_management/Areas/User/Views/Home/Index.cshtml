@@ -22,7 +22,7 @@
                     <div class="card bg-success text-white mb-4">
                         <div class="card-body">Registration</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" asp-action="NewVehiclesRegistration" asp-controller="Home" asp-area="User">Apply For Registration</a>
+                            <a class="small text-white stretched-link" href="@Url.Action("NewVehiclesRegistration", "Home")" asp-area="User">Apply For Registration</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                     <div class="card bg-success text-white mb-4">
                         <div class="card-body">Status</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" asp-action="MyCarList" asp-controller="Status" asp-area="User">Show Status</a>
+                            <a class="small text-white stretched-link" href="@Url.Action("MyCarList", "Status")" asp-area="User">Show Status</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="card bg-success text-white mb-4">
                         <div class="card-body">TAX</div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" asp-action="MyTax" asp-controller="TAX" asp-area="User">See Tax Information</a>
+                            <a class="small text-white stretched-link" href="@Url.Action("MyTax", "TAX")" asp-area="User">See Tax Information</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>

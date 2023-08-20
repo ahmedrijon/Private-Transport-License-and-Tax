@@ -64,6 +64,12 @@ namespace Transport_licensing_tax_management.Areas.User.Controllers
             return View(CarList);
 
         }
+        public async Task<IActionResult> Notice()
+        {
+            return _context.Notices != null ?
+                        View(await _context.Notices.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Notices'  is null.");
+        }
 
     }
 }

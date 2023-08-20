@@ -33,7 +33,11 @@ namespace Transport_licensing_tax_management.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult VehiclesNumberSubmit(string vehiclesNumber, int appointmentDate, long vehiclesId)
         {
-            _context.Vehicles.Where(v => v.VehiclesId == vehiclesId && string.IsNullOrEmpty(v.VehiclesNumber))
+            bool CheckDoubleNumberPLate = _context.Vehicles.Where(x=>x.VehiclesNumber == vehiclesNumber).Any();
+            if(!CheckDoubleNumberPLate)
+            {
+                
+                _context.Vehicles.Where(v => v.VehiclesId == vehiclesId && string.IsNullOrEmpty(v.VehiclesNumber))
                 .ToList().ForEach(v =>
                 {
                     v.Status = "Completed";
@@ -42,9 +46,13 @@ namespace Transport_licensing_tax_management.Areas.Admin.Controllers
                     v.Update_At = DateTime.Now;
                 });
 
-            _context.SaveChanges();
+                _context.SaveChanges();
+                return Json("OK");
+            }
 
-            return Json("OK");
+            
+
+            return Json("Number Plate Alredy Used!");
         }
 
 
