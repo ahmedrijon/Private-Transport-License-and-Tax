@@ -35,8 +35,12 @@
 
                     </div>
                 </div>
+              
                 <div class="col-sm">
                     <div class="x_content">
+                        <p>
+                            <a class="btn btn-success text-white" href="@Url.Action("TaxAllReport", "TAX")">Report</a>
+                        </p>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -46,6 +50,7 @@
                                     <th>Issue Date</th>
                                     <th>Expired Date</th>
                                     <th>Fees</th>
+                                    <th>Action</th>
 
                                 </tr>
                             </thead>
@@ -62,6 +67,10 @@
                                             <td>@registrationFee.Issu_Date</td>
                                             <td>@registrationFee.Expired_Date</td>
                                             <td>@registrationFee.Fees</td>
+                                            <td>
+                                                <a href="@Url.Action("Print", new { id = registrationFee.VehiclesNumber })" class="btn btn-primary btn-sm text-white" data-id="@registrationFee.VehiclesNumber">Print</a>
+                                            </td>
+                                           
                                         </tr>
                                         i++;
                                     }

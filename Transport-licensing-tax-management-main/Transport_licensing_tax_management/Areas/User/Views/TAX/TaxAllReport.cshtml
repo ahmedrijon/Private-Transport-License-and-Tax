@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Transport_licensing_tax_management.ViewModel.TaxesVM>
+
+@{
+    ViewData["Title"] = "Report";
+    Layout = "_ReportLayout";
+}
+
+<style>
+
+    .tgroup, h1, p {
+        margin: 30px;
+    }
+</style>
+<div>
+    <div class="text-center pt-5">
+        <h3 style="text-decoration: underline rgb(146, 146, 146);">Vehicle Report</h3>
+
+
+    </div>
+
+    <div class="tgroup">
+        <table class="table table-bordered border-primary text-center">
+            <thead>
+                <tr>
+                    <th> #SL </th>
+                    <th>Vehicle No.</th>
+                    <th>NID</th>
+                    <th>Issue Date</th>
+                    <th>Expired Date</th>
+                    <th>Fees</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.TaxesHistory != null)
+                {
+                    int i = 1;
+                    foreach (var registrationFee in Model)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@registrationFee.VehiclesNumber</td>
+                            <td>@registrationFee.RegisterNID</td>
+                            <td>@registrationFee.Issu_Date</td>
+                            <td>@registrationFee.Expired_Date</td>
+                            <td>@registrationFee.Fees</td>
+                        </tr>
+                        i++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">No tax history available.</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

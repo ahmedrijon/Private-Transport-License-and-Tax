@@ -4,9 +4,25 @@
     ViewData["Title"] = "New Vehicles Registration List";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<head>
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css" />
+</head>
 <p>
     <a class="btn btn-success text-white" href="@Url.Action("PaymentReportPDF", "Payments")">Report</a>
 </p>
+<table border="0" cellspacing="5" cellpadding="5">
+    <tbody>
+        <tr>
+            <td>Minimum date:</td>
+            <td><input type="text" id="min" name="min"></td>
+        </tr>
+        <tr>
+            <td>Maximum date:</td>
+            <td><input type="text" id="max" name="max"></td>
+        </tr>
+    </tbody>
+</table>
 <table class="table">
     <thead>
         <tr>
@@ -32,3 +48,41 @@
         }
     </tbody>
 </table>
+
+    <script type="text/javascript">
+
+        let minDate, maxDate;
+
+        // Custom filtering function which will search data in column four between two values
+        DataTable.ext.search.push(function (settings, data, dataIndex) {
+            let min = minDate.val();
+            let max = maxDate.val();
+            let date = new Date(data[4]);
+
+            if (
+                (min === null && max === null) ||
+                (min === null && date <= max) ||
+                (min <= date && max === null) ||
+                (min <= date && date <= max)
+            ) {
+                return true;
+            }
+            return false;
+        });
+
+        // Create date inputs
+        minDate = new DateTime('#min', {
+            format: 'MMMM Do YYYY'
+        });
+        maxDate = new DateTime('#max', {
+            format: 'MMMM Do YYYY'
+        });
+
+        // DataTables initialisation
+        let table = new DataTable('#example');
+
+        // Refilter the table
+        document.querySelectorAll('#min, #max').forEach((el) => {
+            el.addEventListener('change', () => table.draw());
+        });
+    </script>
