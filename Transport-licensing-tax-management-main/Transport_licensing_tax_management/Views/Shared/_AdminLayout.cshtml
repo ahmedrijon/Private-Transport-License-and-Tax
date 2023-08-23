@@ -72,8 +72,8 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     @*<a class="dropdown-item" href="javascript:;"> Profile</a>*@
-                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Dashboard", new { area = "Admin" })">
-                                        <button class="btn btn-default btn-flat">Logout</button>
+                                    <form class="form-inline btn-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Dashboard", new { area = "Admin" })">
+                                        <button class="btn btn-default btn-flat btn-info">Logout</button>
                                     </form>
                                    
                                 </div>
@@ -113,7 +113,6 @@
     <script src="~/Admin/build/js/custom.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    
 
 </body>
 </html>

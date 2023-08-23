@@ -49,7 +49,8 @@ namespace Transport_licensing_tax_management.Areas.User.Controllers
             .ToList();
 
             ViewBag.TaxesHistory = taxHistory;
-           
+            ViewBag.CarNumber = CarNumber;
+
             return View(taxHistory);
         }
 
@@ -57,26 +58,21 @@ namespace Transport_licensing_tax_management.Areas.User.Controllers
         {
             var vehicle = _context.Vehicles.FirstOrDefault(v => v.VehiclesNumber == CarNumber);
 
-            if (vehicle == null)
-            {
-                ViewBag.msg = "Car Not Found!";
-                return View();
-            }
             var taxHistory = _context.Taxes
-            .Join(_context.Payments,
-                t => t.PaymentsID,
-                p => p.PaymentsID,
-                (t, p) => new TaxesVM
-                {
-                    taxID = t.taxID,
-                    VehiclesNumber = t.VehiclesNumber,
-                    Fees = p.Amount,
-                    Issu_Date = t.Issu_Date,
-                    Expired_Date = t.Expired_Date,
-                    RegisterNID = vehicle.RegisterNID
-                })
-            .Where(t => t.VehiclesNumber == CarNumber)
-            .ToList();
+                .Join(_context.Payments,
+                    t => t.PaymentsID,
+                    p => p.PaymentsID,
+                    (t, p) => new TaxesVM
+                    {
+                        taxID = t.taxID,
+                        VehiclesNumber = t.VehiclesNumber,
+                        Fees = p.Amount,
+                        Issu_Date = t.Issu_Date,
+                        Expired_Date = t.Expired_Date,
+                        RegisterNID = vehicle.RegisterNID
+                    })
+                .Where(t => t.VehiclesNumber == CarNumber)
+                .ToList();
 
             ViewBag.TaxesHistory = taxHistory;
 
@@ -100,9 +96,7 @@ namespace Transport_licensing_tax_management.Areas.User.Controllers
                     RegisterNID = vehicle.RegisterNID
                 })
             .Where(t => t.VehiclesNumber == CarNumber)
-            .ToList();
-
-            ViewBag.TaxesHistory = taxHistory;
+            .FirstOrDefault();
 
             return View(taxHistory);
         }

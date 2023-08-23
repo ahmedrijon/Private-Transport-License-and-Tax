@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Transport_licensing_tax_management.ViewModel.TaxesVM>
+﻿@model Transport_licensing_tax_management.ViewModel.TaxesVM
 
 @{
     ViewData["Title"] = "Report";
@@ -6,49 +6,42 @@
 }
 
 <style>
-
-    .tgroup, h1, p {
+    .tgroup {
         margin: 30px;
     }
+
+    .report-heading {
+        text-decoration: underline rgb(146, 146, 146);
+    }
 </style>
-<div>
-    <div class="text-center pt-5">
-        <h3 style="text-decoration: underline rgb(146, 146, 146);">Vehicle Report</h3>
 
+<div class="text-center pt-5">
+    <h3 class="report-heading">Vehicle Report</h3>
+</div>
 
-    </div>
-
-    <div class="tgroup">
-        <table class="table table-bordered border-primary text-center">
-            <tbody>
-                @if (ViewBag.TaxesHistory != null)
-                {
-                    foreach (var registrationFee in Model)
-                    {
-                            <tr> 
-                                <th>Vehicle No.</th>
-                                <td> @registrationFee.VehiclesNumber</td>
-                                </tr>
-                                <tr>
-                                <th>NID</th>
-                                <td>@registrationFee.RegisterNID</td>
-                                </tr>
-                                <tr>
-                                <th>Issue Date</th>
-                                <td>@registrationFee.Issu_Date</td>
-                                </tr>
-                                <tr>
-                                <th>Expired Date</th>
-                                   <td>@registrationFee.Expired_Date</td>
-                                </tr>
-                               <tr>
-                                <th>Fees</th>
-                                  <td>@registrationFee.Fees</td>
-                            </tr>
-  
-                    }
-                }
-            </tbody>
-        </table>
-    </div>
+<div class="tgroup">
+    <table class="table table-bordered border-primary text-center">
+        <tbody>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.VehiclesNumber)</th>
+                <td>@Html.DisplayFor(model => model.VehiclesNumber)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.RegisterNID)</th>
+                <td>@Html.DisplayFor(model => model.RegisterNID)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Issu_Date)</th>
+                <td>@Html.DisplayFor(model => model.Issu_Date)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Expired_Date)</th>
+                <td>@Html.DisplayFor(model => model.Expired_Date)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Fees)</th>
+                <td>@Html.DisplayFor(model => model.Fees)</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
