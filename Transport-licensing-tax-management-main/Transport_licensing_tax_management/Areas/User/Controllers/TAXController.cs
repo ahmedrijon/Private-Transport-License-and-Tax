@@ -51,6 +51,7 @@ namespace Transport_licensing_tax_management.Areas.User.Controllers
             ViewBag.TaxesHistory = taxHistory;
             ViewBag.CarNumber = CarNumber;
 
+
             return View(taxHistory);
         }
 
@@ -78,27 +79,18 @@ namespace Transport_licensing_tax_management.Areas.User.Controllers
 
             return View(taxHistory);
         }
-        public IActionResult Print(string CarNumber)
+        public IActionResult Print(string CarNumber, long taxHistory)
         {
+            var tax = _context.Taxes.FirstOrDefault(x => x.taxID == taxHistory);
             var vehicle = _context.Vehicles.FirstOrDefault(v => v.VehiclesNumber == CarNumber);
+            if(tax !=null && vehicle != null)
+            {
+                if(ta)
 
-            var taxHistory = _context.Taxes
-            .Join(_context.Payments,
-                t => t.PaymentsID,
-                p => p.PaymentsID,
-                (t, p) => new TaxesVM
-                {
-                    taxID = t.taxID,
-                    VehiclesNumber = t.VehiclesNumber,
-                    Fees = p.Amount,
-                    Issu_Date = t.Issu_Date,
-                    Expired_Date = t.Expired_Date,
-                    RegisterNID = vehicle.RegisterNID
-                })
-            .Where(t => t.VehiclesNumber == CarNumber)
-            .FirstOrDefault();
-
-            return View(taxHistory);
+            }
+            return View();
         }
+
+       
     }
 }
