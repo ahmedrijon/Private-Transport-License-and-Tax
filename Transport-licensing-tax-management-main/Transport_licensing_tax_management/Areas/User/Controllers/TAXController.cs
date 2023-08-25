@@ -98,7 +98,6 @@ namespace Transport_licensing_tax_management.Areas.User.Controllers
                     }).Where(t => t.taxID == taxid)
                 .FirstOrDefault();
 
-            ViewBag.TaxesHistory = taxHistory;
 
             return View(taxHistory);
 

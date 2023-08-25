@@ -16,7 +16,8 @@
 </style>
 
 <div class="text-center pt-5">
-    <h3 class="report-heading">Vehicle Report</h3>
+    <h3 class="report-heading text-success font-weight-bold">TAX TOKEN</h3>
+    <h3>(Always Keep This In Your Vehicle)</h3>
 </div>
 
 <div class="tgroup">
@@ -31,15 +32,15 @@
                 <td>@Html.DisplayFor(model => model.RegisterNID)</td>
             </tr>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.Issu_Date)</th>
+                <th>Issue Date</th>
                 <td>@Html.DisplayFor(model => model.Issu_Date)</td>
             </tr>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.Expired_Date)</th>
+                <th>Expired Date</th>
                 <td>@Html.DisplayFor(model => model.Expired_Date)</td>
             </tr>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.Fees)</th>
+                <th>Total Amount Paid (Tk)</th>
                 <td>@Html.DisplayFor(model => model.Fees)</td>
             </tr>
         </tbody>
