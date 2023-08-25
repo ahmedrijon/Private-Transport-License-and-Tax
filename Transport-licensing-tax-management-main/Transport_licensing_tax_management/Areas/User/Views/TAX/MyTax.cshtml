@@ -2,7 +2,7 @@
 @{
 
     Layout = "~/Views/Shared/_UserLayout.cshtml";
-  
+
 
 }
 <div class="card mt-4" style="width: 100%;">
@@ -36,17 +36,18 @@
 
                     </div>
                 </div>
-             
+
                 <div class="col-sm">
                     <div class="x_content">
-                      
+
                         <table class="table table-bordered">
-                                    <p>
-                                <a href="@Url.Action("TaxAllReport", new {CarNumber= ViewBag.CarNumber,taxHistory= ViewBag.TaxesHistory })" class="btn btn-success btn-sm text-white">Report</a>
-                                    </p>
+                            <p>
+                                <a href="@Url.Action("TaxAllReport", new {CarNumber= ViewBag.CarNumber })" class="btn btn-success btn-sm text-white">Report</a>
+                            </p>
                             <thead>
                                 <tr>
                                     <th>SL</th>
+                                    <th>Tax ID</th>
                                     <th>Vehicle No.</th>
                                     <th>NID</th>
                                     <th>Issue Date</th>
@@ -62,19 +63,20 @@
                                     int i = 1;
                                     foreach (var registrationFee in Model)
                                     {
-                              
+
                                         <tr>
                                             <td>@i</td>
+                                            <td>@registrationFee.taxID</td>
                                             <td>@registrationFee.VehiclesNumber</td>
                                             <td>@registrationFee.RegisterNID</td>
                                             <td>@registrationFee.Issu_Date</td>
                                             <td>@registrationFee.Expired_Date</td>
                                             <td>@registrationFee.Fees</td>
                                             <td>
-                                                <a href="@Url.Action("Print", new { CarNumber = registrationFee.VehiclesNumber })" class="btn btn-primary btn-sm text-white">Print</a>
-                                           
+                                                <a href="@Url.Action("Print", new { taxid = registrationFee.taxID, carNum=registrationFee.VehiclesNumber })" class="btn btn-primary btn-sm text-white">Print</a>
+
                                             </td>
-                                           
+
                                         </tr>
                                         i++;
                                     }
@@ -88,10 +90,10 @@
 
                             </tbody>
                         </table>
-                              
+
                     </div>
                 </div>
-                       
+
             </div>
         </div>
 

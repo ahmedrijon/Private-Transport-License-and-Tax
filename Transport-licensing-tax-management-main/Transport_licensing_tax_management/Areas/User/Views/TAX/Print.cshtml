@@ -1,4 +1,4 @@
-﻿@model Transport_licensing_tax_management.DataModel.Taxes
+﻿@model Transport_licensing_tax_management.ViewModel.TaxesVM
 
 @{
     ViewData["Title"] = "Report";
@@ -23,11 +23,11 @@
     <table class="table table-bordered border-primary text-center">
         <tbody>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.VehiclesNumber)</th>
+                <th>Vehicles Number</th>
                 <td>@Html.DisplayFor(model => model.VehiclesNumber)</td>
             </tr>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.RegisterNID)</th>
+                <th>User NID</th>
                 <td>@Html.DisplayFor(model => model.RegisterNID)</td>
             </tr>
             <tr>
@@ -38,10 +38,10 @@
                 <th>@Html.DisplayNameFor(model => model.Expired_Date)</th>
                 <td>@Html.DisplayFor(model => model.Expired_Date)</td>
             </tr>
-            @*<tr>
+            <tr>
                 <th>@Html.DisplayNameFor(model => model.Fees)</th>
                 <td>@Html.DisplayFor(model => model.Fees)</td>
-            </tr>*@
+            </tr>
         </tbody>
     </table>
 </div>
