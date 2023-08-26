@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "New Vehicles Registration List";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int i = 1;
 }
 <head>
     <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
@@ -11,13 +12,19 @@
 <p>
     <a class="btn btn-success text-white" href="@Url.Action("PaymentReportPDF", "Payments")">Report</a>
 </p>
+<input type="text" id="searchInput" placeholder="Search by Created At">
+<button id="printButton" class="btn btn-primary btn-sm">Print</button>
+<br />
+<input type="text" id="searchInput2" placeholder="Search by Type">
+<button id="printButton2" class="btn btn-primary btn-sm">Print</button>
 
 <table class="table table-bordered">
     <thead>
         <tr>
+            <th>SL</th>
+            <th>Payment By Car Number</th>
             <th>Payments ID</th>
             <th>Payment By Code</th>
-            <th>Payment By Car Number</th>
             <th>Amount</th>
             <th>Type</th>
             <th>Create At</th>
@@ -27,18 +34,67 @@
         @foreach (var payment in Model)
         {
             <tr>
+                <td>@i.</td>
+                <td>@payment.CarNumber</td>
                 <td>@payment.PaymentsID</td>
                 <td>@payment.PaymentCode</td>
-                <td>@payment.CarNumber</td>
                 <td>@payment.Amount</td>
                 <td>@payment.Type</td>
                 <td>@payment.Create_At</td>
             </tr>
+            i++;
         }
     </tbody>
 </table>
 
-    <script type="text/javascript">
+
+
+
+<!--Code For Search Report And get Print-->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Search functionality
+        $("#searchInput").on("keyup", function () {
+            var searchText = $(this).val().toLowerCase();
+            $("tbody tr").filter(function () {
+                $(this).toggle($(this).find("td:last-child").text().toLowerCase().indexOf(searchText) > -1)
+            });
+        });
+
+        // Print functionality
+        $("#printButton").on("click", function () {
+            window.print();
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        // Search functionality
+        $("#searchInput2").on("keyup", function () {
+            var searchText = $(this).val().toLowerCase();
+            $("tbody tr").filter(function () {
+                $(this).toggle($(this).find("td:nth-child(6)").text().toLowerCase().indexOf(searchText) > -1)
+            });
+        });
+
+        // Print functionality
+        $("#printButton2").on("click", function () {
+            window.print();
+        });
+    });
+</script>
+
+
+
+
+
+
+    @*<script type="text/javascript">
 
         let minDate, maxDate;
 
@@ -74,4 +130,4 @@
         document.querySelectorAll('#min, #max').forEach((el) => {
             el.addEventListener('change', () => table.draw());
         });
-    </script>
+    </script>*@
