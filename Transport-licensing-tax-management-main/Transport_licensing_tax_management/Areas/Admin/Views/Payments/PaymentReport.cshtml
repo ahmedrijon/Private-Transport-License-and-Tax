@@ -3,22 +3,22 @@
 @{
     ViewData["Title"] = "New Vehicles Registration List";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    int i = 1;
 }
-<head>
-    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
-    <link href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css" />
-</head>
+
 <p>
     <a class="btn btn-success text-white" href="@Url.Action("PaymentReportPDF", "Payments")">Report</a>
 </p>
-<input type="text" id="searchInput" placeholder="Search by Created At">
-<button id="printButton" class="btn btn-primary btn-sm">Print</button>
-<br />
-<input type="text" id="searchInput2" placeholder="Search by Type">
-<button id="printButton2" class="btn btn-primary btn-sm">Print</button>
 
-<table class="table table-bordered">
+<!--Search And Print For Date-->
+<input type="text" id="searchInput" placeholder="Search by Created At">
+<button id="printButton" class="btn btn-dark btn-sm">Print</button>
+<br />
+
+<!--Search And Print For Type-->
+<input type="text" id="searchInput2" placeholder="Search by Type">
+<button id="printButton2" class="btn btn-dark btn-sm">Print</button>
+
+<table class="table table-bordered" id="paymentTable">
     <thead>
         <tr>
             <th>SL</th>
@@ -34,7 +34,7 @@
         @foreach (var payment in Model)
         {
             <tr>
-                <td>@i.</td>
+                <td class="sl-number"></td>
                 <td>@payment.CarNumber</td>
                 <td>@payment.PaymentsID</td>
                 <td>@payment.PaymentCode</td>
@@ -42,11 +42,9 @@
                 <td>@payment.Type</td>
                 <td>@payment.Create_At</td>
             </tr>
-            i++;
         }
     </tbody>
 </table>
-
 
 
 
@@ -88,46 +86,16 @@
         });
     });
 </script>
+<!--Code For Search Report And get Print End-->
 
+<!--Add serial number reverse order start-->
+<script>
+    // Add serial numbers in reverse order
+    var rows = document.querySelectorAll("#paymentTable tbody tr");
+    for (var i = rows.length - 1, sl = 1; i >= 0; i--, sl++) {
+        var slCell = rows[i].querySelector(".sl-number");
+        slCell.textContent = sl;
+    }
+</script>
+<!--Add serial number reverse order end-->
 
-
-
-
-
-    @*<script type="text/javascript">
-
-        let minDate, maxDate;
-
-        // Custom filtering function which will search data in column four between two values
-        DataTable.ext.search.push(function (settings, data, dataIndex) {
-            let min = minDate.val();
-            let max = maxDate.val();
-            let date = new Date(data[4]);
-
-            if (
-                (min === null && max === null) ||
-                (min === null && date <= max) ||
-                (min <= date && max === null) ||
-                (min <= date && date <= max)
-            ) {
-                return true;
-            }
-            return false;
-        });
-
-        // Create date inputs
-        minDate = new DateTime('#min', {
-            format: 'MMMM Do YYYY'
-        });
-        maxDate = new DateTime('#max', {
-            format: 'MMMM Do YYYY'
-        });
-
-        // DataTables initialisation
-        let table = new DataTable('#example');
-
-        // Refilter the table
-        document.querySelectorAll('#min, #max').forEach((el) => {
-            el.addEventListener('change', () => table.draw());
-        });
-    </script>*@
