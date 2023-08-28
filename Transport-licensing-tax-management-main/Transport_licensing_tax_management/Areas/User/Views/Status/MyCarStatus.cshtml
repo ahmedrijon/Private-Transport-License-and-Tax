@@ -5,7 +5,7 @@
 
 @{
     var step1Title = "Not Reached Yet";
-    var step2Title = "Not Reached Yet";
+    var step2Title = "For Payment";
     var step3Title = "Not Reached Yet";
     var step4Title = "Not Reached Yet";
 
@@ -17,21 +17,21 @@
         {
             step1Title = "Pending";
         }
-        else if (status == "Waiting For Payment")
+        else if (status == "Waiting for payment")
         {
             step1Title = "Document Approved";
-            step2Title = "For Payment (Pay Before Appointment Date, Else It Will Not Valid)";
+            step2Title = "For Payment";
         }
         else if (status == "Payment")
         {
             step1Title = "Document Approved";
-            step2Title = "For Payment (Pay Before Appointment Date, Else It Will Not Valid)";
+            step2Title = "For Payment";
             step3Title = "Your Appointment Date";
         }
         else if (status == "Completed")
         {
             step1Title = "Document Approved";
-            step2Title = "For Payment (Pay Before Appointment Date, Else It Will Not Valid)";
+            step2Title = "For Payment";
             step3Title = "Your Appointment Date: ";
             step4Title = "Appointment Date For Collect Number Plate: ";
         }

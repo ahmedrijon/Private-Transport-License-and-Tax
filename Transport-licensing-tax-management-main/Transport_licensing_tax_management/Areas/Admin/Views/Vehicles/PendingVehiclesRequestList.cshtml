@@ -12,9 +12,7 @@
             <th>
                 Register NID
             </th>
-            <th>
-                Owned
-            </th>
+           
             <th>
                 Engine Number
             </th>
@@ -42,9 +40,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.RegisterNID)
                 </td>
-                <td>
-                    1
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.EngineNumber)
                 </td>
@@ -60,13 +56,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
-
+                
                 <td>
                     <a class="btn btn-info btn-sm" href="@Url.Action("Details", "Vehicles", new { id = item.VehiclesId })">Details</a>
                     <button class="btn btn-danger btn-sm dltbtn" asp-id="@item.VehiclesId">Reject</button>
                 </td>
-
+                
             </tr>
+            
         }
     </tbody>
 </table>
