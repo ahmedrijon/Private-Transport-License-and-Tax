@@ -10,13 +10,18 @@
 </p>
 
 <!--Search And Print For Date-->
-<input type="text" id="searchInput" placeholder="Search by Created At">
+<input type="text" id="searchInput" placeholder="Search : Created At">
 <button id="printButton" class="btn btn-dark btn-sm">Print</button>
-<br />
 
 <!--Search And Print For Type-->
-<input type="text" id="searchInput2" placeholder="Search by Type">
+<input type="text" id="searchInput2" placeholder="Search : Type">
 <button id="printButton2" class="btn btn-dark btn-sm">Print</button>
+
+<!--New pymnet code code start-->
+<input type="text" id="searchInput3" placeholder="Search : Payment By Code" onkeyup="searchByPaymentCode()">
+
+<button onclick="printTable()" class="btn btn-dark btn-sm">Print</button>
+<!--New pymnet code code end-->
 
 <table class="table table-bordered" id="paymentTable">
     <thead>
@@ -99,3 +104,79 @@
 </script>
 <!--Add serial number reverse order end-->
 
+
+<!--script for payment cde-->
+<script>
+    function searchByPaymentCode() {
+        // Get the input value
+        var input = document.getElementById("searchInput3").value.toUpperCase();
+
+        // Get the table body
+        var tableBody = document.getElementsByTagName("tbody")[0];
+
+        // Get all the rows in the table
+        var rows = tableBody.getElementsByTagName("tr");
+
+        // Loop through all the rows
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
+
+            // Get the cell with the Payment By Code data (it's in the fourth cell of each row)
+            var cell = row.getElementsByTagName("td")[3]; // 3 is the index of the "Payment By Code" column
+
+            // If the cell exists and contains the search text, display the row; otherwise, hide it
+            if (cell) {
+                var text = cell.textContent || cell.innerText;
+                if (text.toUpperCase().indexOf(input) > -1) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<script>
+    function searchByPaymentCode() {
+        // Get the input value
+        var input = document.getElementById("searchInput3").value.toUpperCase();
+
+        // Get the table body
+        var tableBody = document.getElementsByTagName("tbody")[0];
+
+        // Get all the rows in the table
+        var rows = tableBody.getElementsByTagName("tr");
+
+        // Loop through all the rows
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
+
+            // Get the cell with the Payment By Code data (it's in the fourth cell of each row)
+            var cell = row.getElementsByTagName("td")[3]; // 3 is the index of the "Payment By Code" column
+
+            // If the cell exists and contains the search text, display the row; otherwise, hide it
+            if (cell) {
+                var text = cell.textContent || cell.innerText;
+                if (text.toUpperCase().indexOf(input) > -1) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+<script>
+    function printTable() {
+        var printWindow = window.open('', '', 'width=800,height=600');
+        printWindow.document.open();
+        printWindow.document.write('<html><head><title>Payment Table</title></head><body>');
+        printWindow.document.write('<h1>Payment Table</h1>');
+        printWindow.document.write(document.getElementById('paymentTable').outerHTML);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+        printWindow.close();
+    }
+</script>
